@@ -1,4 +1,4 @@
-/**
+﻿/**
  * src/pages/base.page.ts
  *
  * BasePage provides shared methods used by every page object.
@@ -7,7 +7,7 @@
  */
 
 import { type Page, type Locator } from '@playwright/test';
-import type { SiteConfig } from '@types/site-config.types';
+import type { SiteConfig } from '../types/site-config.types';
 
 export class BasePage {
   readonly page: Page;
@@ -20,7 +20,7 @@ export class BasePage {
     this.url = config.url;
   }
 
-  // ── Navigation ──────────────────────────────────────────────────────────────
+  // â”€â”€ Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /** Navigate to the site root URL. */
   async navigate(): Promise<void> {
@@ -32,14 +32,14 @@ export class BasePage {
     await this.page.waitForLoadState('networkidle');
   }
 
-  // ── Page metadata ───────────────────────────────────────────────────────────
+  // â”€â”€ Page metadata â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /** Return the document <title> text. */
   async getTitle(): Promise<string> {
     return this.page.title();
   }
 
-  // ── Layout checks ───────────────────────────────────────────────────────────
+  // â”€â”€ Layout checks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
    * Returns true if there is no horizontal overflow (i.e., page is responsive).
@@ -52,7 +52,7 @@ export class BasePage {
     return !hasHorizontalScroll;
   }
 
-  // ── Screenshots ─────────────────────────────────────────────────────────────
+  // â”€â”€ Screenshots â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /** Capture a full-page screenshot and return its buffer. */
   async takeScreenshot(name: string): Promise<Buffer> {
@@ -62,7 +62,7 @@ export class BasePage {
     });
   }
 
-  // ── Console errors ──────────────────────────────────────────────────────────
+  // â”€â”€ Console errors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
    * Collect JavaScript console errors emitted during a test.
@@ -84,7 +84,7 @@ export class BasePage {
     return inlineErrors;
   }
 
-  // ── Element helpers ─────────────────────────────────────────────────────────
+  // â”€â”€ Element helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /**
    * Return all <a> elements on the page as Playwright Locators.
@@ -103,3 +103,4 @@ export class BasePage {
     return locator.all();
   }
 }
+

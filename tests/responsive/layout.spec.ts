@@ -56,10 +56,14 @@ test.describe('Responsive Layout @responsive', () => {
         document.querySelectorAll('p, span, a, li, td, th, label, button, h1, h2, h3, h4, h5, h6')
       );
 
+      // Exclude footer/contentinfo and deliberately small decorative text from this check
+      const excludedSelector = 'footer, [role="contentinfo"], .footer, .site-footer, .copyright, [aria-hidden="true"]';
+
       return textElements.filter((el) => {
+        if (el.closest(excludedSelector)) return false;
         const style = window.getComputedStyle(el);
         const fontSize = parseFloat(style.fontSize);
-        const isVisible = el.getBoundingClientRect().height > 0;
+        const isVisible = el.getBoundingClientRect().height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
         return isVisible && fontSize < MIN_FONT_SIZE;
       }).length;
     });

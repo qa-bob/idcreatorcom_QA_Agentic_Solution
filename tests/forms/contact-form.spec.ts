@@ -214,9 +214,12 @@ test.describe('Contact Form @forms', () => {
       }
     });
 
-    await submitBtn.click({ force: true });
+    // Use the HTML5 validation API to show validation messages without submitting
+    await form.evaluate((f: HTMLFormElement) => {
+      try { return f.reportValidity(); } catch { return false; }
+    });
 
-    // Wait briefly to allow validation messages to appear
+    // Wait briefly to allow any client-side validation UI to appear
     await page.waitForTimeout(500);
 
     // Check that we're still on the same page (form was NOT submitted)

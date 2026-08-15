@@ -32,8 +32,17 @@ test.describe('Navigation @navigation', () => {
       return;
     }
 
-    const broken = results.filter((r) => !r.ok && r.status !== 0);
-    const unreachable = results.filter((r) => r.status === 0);
+    // Only check links that resolve to the same origin as siteConfig.url. External links (different origins)
+    // are skipped because they may be hosted on third-party services that block automated requests.
+    const siteOrigin = new URL(siteConfig.url).origin;
+    const sameOriginResults = results.filter(r => new URL(r.url, siteConfig.url).origin === siteOrigin);
+    const externalResults = results.filter(r => new URL(r.url, siteConfig.url).origin !== siteOrigin);
+    if (externalResults.length > 0) {
+      console.info('[navigation] Skipping external links from reachability check:\n' + externalResults.map(r => `  ${r.url}`).join('\n'));
+    }
+
+    const broken = sameOriginResults.filter((r) => !r.ok && r.status !== 0);
+    const unreachable = sameOriginResults.filter((r) => r.status === 0);
 
     // Log unreachable links as warnings (network issues, not 404s)
     if (unreachable.length > 0) {

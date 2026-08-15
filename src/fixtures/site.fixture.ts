@@ -1,4 +1,4 @@
-/**
+﻿/**
  * src/fixtures/site.fixture.ts
  *
  * Extends Playwright's base `test` with pre-constructed page objects and the
@@ -10,12 +10,12 @@
  */
 
 import { test as base, expect } from '@playwright/test';
-import { loadSiteConfig, type SiteConfig } from '@types/site-config.types';
+import { loadSiteConfig, type SiteConfig } from '../types/site-config.types';
 import { HomePage } from '@pages/home.page';
 import { NavigationPage } from '@pages/navigation.page';
 import { ContactFormPage } from '@pages/contact.page';
 
-// ── Fixture type definitions ─────────────────────────────────────────────────
+// â”€â”€ Fixture type definitions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export interface Fixtures {
   /** Fully resolved site configuration loaded from site.config.json */
@@ -28,20 +28,20 @@ export interface Fixtures {
   contactPage: ContactFormPage;
 }
 
-// ── Extended test object ─────────────────────────────────────────────────────
+// â”€â”€ Extended test object â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export const test = base.extend<Fixtures>({
   /**
-   * siteConfig — loaded once per worker from site.config.json.
+   * siteConfig â€” loaded once per worker from site.config.json.
    * Shared across all fixtures in the same test.
    */
-  siteConfig: async ({}, use) => {
+  siteConfig: async ({}: unknown, use) => {
     const config = loadSiteConfig();
     await use(config);
   },
 
   /**
-   * homePage — constructs HomePage and navigates to the site root.
+   * homePage â€” constructs HomePage and navigates to the site root.
    * Waits for domcontentloaded before handing control to the test.
    */
   homePage: async ({ page, siteConfig }, use) => {
@@ -51,7 +51,7 @@ export const test = base.extend<Fixtures>({
   },
 
   /**
-   * navigationPage — constructs NavigationPage without navigating.
+   * navigationPage â€” constructs NavigationPage without navigating.
    * Tests that need to be on a specific page should call navigate() themselves.
    */
   navigationPage: async ({ page, siteConfig }, use) => {
@@ -60,7 +60,7 @@ export const test = base.extend<Fixtures>({
   },
 
   /**
-   * contactPage — constructs ContactFormPage without navigating.
+   * contactPage â€” constructs ContactFormPage without navigating.
    * Tests should navigate to the appropriate page first.
    */
   contactPage: async ({ page, siteConfig }, use) => {
@@ -71,3 +71,4 @@ export const test = base.extend<Fixtures>({
 
 // Re-export expect so tests only need one import source
 export { expect };
+
