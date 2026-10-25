@@ -231,7 +231,7 @@ test.describe('Contact Form @forms', () => {
     // Check for HTML5 validation API on required fields
     const firstRequired = form.locator('[required]').first();
     if (await firstRequired.count() > 0) {
-      const isValid = await firstRequired.evaluate<boolean>((el) => {
+      const isValid = await firstRequired.evaluate((el) => {
         return (el as HTMLInputElement).validity?.valid ?? true;
       });
       expect(
