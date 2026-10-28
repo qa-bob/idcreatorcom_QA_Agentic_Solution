@@ -10,7 +10,7 @@
  */
 
 import { test as base, expect } from '@playwright/test';
-import { loadSiteConfig, type SiteConfig } from '../types/site-config.types';
+import { loadSiteConfig, type SiteConfig } from '@site-types/site-config.types';
 import { HomePage } from '@pages/home.page';
 import { NavigationPage } from '@pages/navigation.page';
 import { ContactFormPage } from '@pages/contact.page';
@@ -35,7 +35,8 @@ export const test = base.extend<Fixtures>({
    * siteConfig â€” loaded once per worker from site.config.json.
    * Shared across all fixtures in the same test.
    */
-  siteConfig: async ({}: unknown, use) => {
+  // eslint-disable-next-line no-empty-pattern -- Playwright fixture signature requires the destructure
+  siteConfig: async ({}, use) => {
     const config = loadSiteConfig();
     await use(config);
   },
